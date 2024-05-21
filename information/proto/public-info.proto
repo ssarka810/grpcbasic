@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package greet;
+
+option go_package ="github.com/ss810n/go-grpc/information/proto";
+
+message BasicInfo{
+  string firstname=1;
+  string lastname=2;
+  string location=3;
+}
+
+message DetailedInfo{
+  string name=1;
+  string country=2;
+  string message=3;
+}
+service PublicInformationService {
+  rpc GetDetails(BasicInfo) returns (DetailedInfo);
+  rpc ServerStreamGetDetails (BasicInfo) returns ( stream DetailedInfo);
+  rpc ClientStreamGetDetails (stream BasicInfo) returns ( DetailedInfo);
+  rpc BiDirectionalStreamGetDetails (stream BasicInfo) returns ( stream DetailedInfo){};
+}
